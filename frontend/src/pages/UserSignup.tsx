@@ -9,7 +9,7 @@ const UserSignup: React.FC = () => {
     <div>
       <h1>Cadastro de Usuário</h1>
       <SignupForm consent={consent} setConsent={setConsent} />
-      <ConsentCheckbox consent={consent} setConsent={setConsent} />
+      {/* <ConsentCheckbox consent={consent} setConsent={setConsent} /> */}
     </div>
   );
 };

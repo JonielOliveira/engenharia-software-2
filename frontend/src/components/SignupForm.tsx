@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // Importando useState
-import axios from '../services/api';
+import api from '../services/api';
 
 // Definição das propriedades que o SignupForm vai aceitar
 interface SignupFormProps {
@@ -17,7 +17,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ consent, setConsent }) => { // 
     e.preventDefault();
     try {
       // Fazendo a requisição para cadastrar o usuário
-      await axios.post('/auth/register', { email, password, name, cpf, consentGiven: consent });
+      await api.post('/auth/users', { email, password, name, cpf, consentGiven: consent });
       alert('Cadastro realizado com sucesso!');
     } catch (error) {
       console.error('Erro ao cadastrar', error);

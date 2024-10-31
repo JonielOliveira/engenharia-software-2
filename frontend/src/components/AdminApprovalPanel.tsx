@@ -10,33 +10,37 @@ type User = {
 };
 
 const AdminApprovalPanel: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [pendingUsers, setPendingUsers] = useState<User[]>([]);
   const [approvedUsers, setApprovedUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await api.get('/auth/pending-users'); // Endpoint para usuários pendentes de aprovação
-      setUsers(response.data);
+    const fetchAllUsers = async () => {
+      const response = await api.get('/auth/users'); // Endpoint para usuários pendentes de aprovação
+      setAllUsers(response.data);
     };
-    fetchUsers();
+    fetchAllUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchPendingUsers = async () => {
+      const response = await api.get('/auth/users/pending'); // Endpoint para usuários pendentes de aprovação
+      setPendingUsers(response.data);
+    };
+    fetchPendingUsers();
   }, []);
 
   useEffect(() => {
     const fetchApprovedUsers = async () => {
-      const response = await api.get('/auth/approved-users'); // Endpoint para usuários aprovados
+      const response = await api.get('/auth/users/approved'); // Endpoint para usuários aprovados
       setApprovedUsers(response.data); // Supondo que `setApprovedUsers` seja o estado para os aprovados
     };
     fetchApprovedUsers();
   }, []);
   
-  // const handleApproval = async (userId: string, isApproved: boolean) => {
-  //   await api.put(`/auth/approve-user/${userId}`, { isApproved });
-  //   setUsers(users.filter(user => user._id !== userId)); // Remove usuário da lista após aprovação/rejeição
-  // };
-
   const approveUser = async (userId: string) => {
     try {
-      const response = await api.put('/auth/approve-user', { userId });
+      const response = await api.patch('/auth/users/approve', { userId });
       alert(response.data.message); // Exibe uma mensagem de sucesso
       // Atualize a lista de usuários pendentes ou aprovados, conforme necessário
     } catch (error) {
@@ -46,7 +50,7 @@ const AdminApprovalPanel: React.FC = () => {
   
   const deleteUser = async (userId: string) => {
     try {
-      const response = await api.delete('/auth/delete-user', { data: { userId } });
+      const response = await api.delete(`/auth/users/${userId}`);
       alert(response.data.message); // Exibe uma mensagem de sucesso
       // Atualize a lista de usuários pendentes conforme necessário
     } catch (error) {
@@ -58,7 +62,7 @@ const AdminApprovalPanel: React.FC = () => {
     <div>
       <h2>Clientes - Aguardando Aprovação:</h2>
       <ul>
-        {users.map(user => (
+        {pendingUsers.map(user => (
           <li key={user._id}>
             {user.email} - <button onClick={() => approveUser(user._id)}>Aprovar</button>
             <button onClick={() => deleteUser(user._id)}>Rejeitar</button>
@@ -74,6 +78,16 @@ const AdminApprovalPanel: React.FC = () => {
           </li>
         ))}
       </ul>
+
+      <h2>Todos os Clientes:</h2>
+      <ul>
+        {allUsers.map(user => (
+          <li key={user._id}>
+            {user.name} - {user.email} - {user.cpf}
+          </li>
+        ))}
+      </ul>
+
     </div>
   );
 };
