@@ -102,7 +102,7 @@ const AdminProductLists: React.FC = () => {
           </li>
         ))}
       </ul>
-
+      <button type="button" onClick={() => navigate('/admin/product/create')}>Novo Produto</button>
     </div>
   );
 };

@@ -33,8 +33,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSuccess }) => {
   // Edição do produto
   useEffect(() => {
 
-    console.log("O ID é: " + productId);
-
     if (productId) {
       const fetchProduct = async () => {
         const response = await api.get(`/admin/products/${productId}`);
