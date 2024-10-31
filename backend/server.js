@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
+const productRoutesAdmin = require('./routes/productRoutesAdmin');
 const reportRoutes = require('./routes/reportRoutes');
 
 const app = express();
@@ -16,7 +16,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/auth', authRoutes);
-app.use('/products', productRoutes);
+app.use('/admin', productRoutesAdmin);
+// app.use('/products', productRoutes);
 app.use('/reports', reportRoutes);
 
 const PORT = process.env.PORT || 5000;

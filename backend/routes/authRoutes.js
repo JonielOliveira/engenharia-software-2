@@ -1,19 +1,33 @@
-const express = require('express');
-const { register, getPendingUsers, getApprovedUsers, approveUser, deleteUser } = require('../controllers/authController');
-const router = express.Router();
+    const express = require('express');
+    const router = express.Router();
+    const { createUser,
+            updateUser,
+            deleteUser,
+            listAllUsers,
+            getPendingUsers,
+            getApprovedUsers,
+            approveUser
+        } = require('../controllers/authController');
 
-router.post('/register', register);
+    // [1] Criar um novo usuário
+    router.post('/users', createUser);
 
-// Rota para buscar usuários pendentes de aprovação
-router.get('/pending-users', getPendingUsers);
+    // [2] Atualizar um usuário específico
+    router.put('/users/:userId', updateUser);
 
-// Rota para buscar usuários aprovados
-router.get('/approved-users', getApprovedUsers);
+    // [3] Deletar um usuário específico
+    router.delete('/users/:userId', deleteUser);
 
-// Rota para aprovar um usuário
-router.put('/approve-user', approveUser);
+    // [4] Listar todos os usuários
+    router.get('/users', listAllUsers);
 
-// Rota para excluir usuário
-router.delete('/delete-user', deleteUser);
+    // [5] Obter todos os usuários não aprovados
+    router.get('/users/pending', getPendingUsers);
 
-module.exports = router;
+    // [6] Obter todos os usuários aprovados
+    router.get('/users/approved', getApprovedUsers);
+
+    // [7] Aprovar um usuário
+    router.patch('/users/approve', approveUser);
+
+    module.exports = router;
