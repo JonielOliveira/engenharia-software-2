@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
 // Definição das propriedades que o ProductForm vai aceitar
@@ -10,6 +10,7 @@ interface ProductFormProps {
 
 const ProductForm: React.FC<ProductFormProps> = ({ onSuccess }) => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
@@ -156,6 +157,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSuccess }) => {
         Produto Ativo
       </label>
       <br />
+      <button type="button" onClick={() => navigate(-1)}>Voltar</button>
       <button type="submit">Salvar Produto</button>
     </form>
   );
