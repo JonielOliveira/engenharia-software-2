@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductForm from '../components/ProductForm';
+import Sidebar from '../components/Sidebar';
 
 const AdminProductEdit: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState('');
@@ -9,10 +10,18 @@ const AdminProductEdit: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Atualização de Produto</h1>
-      {successMessage && <p>{successMessage}</p>}
-      <ProductForm onSuccess={handleSuccess} />
+    <div className="row">
+      {/* Sidebar */}
+      <div className="col s3">
+        <Sidebar />
+      </div>
+
+      {/* Conteúdo Principal */}
+      <div className="col s9">
+        <h1>Atualização de Produto</h1>
+        {successMessage && <p>{successMessage}</p>}
+        <ProductForm onSuccess={handleSuccess} />
+      </div>
     </div>
   );
 };
