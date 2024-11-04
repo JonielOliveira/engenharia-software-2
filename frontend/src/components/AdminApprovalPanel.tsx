@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import NavbarTeal from './NavbarTeal';
+import NavbarOrange from './NavbarOrange';
 
 type User = {
   _id: string;
@@ -59,37 +61,50 @@ const AdminApprovalPanel: React.FC = () => {
   };
   
   return (
-    <div>
-      <h2>Clientes - Aguardando Aprovação:</h2>
-      <ul>
+    <div className="container">
+      <NavbarOrange title="Dashboard do Administrador: Clientes" />
+      {/* <h2 className="center-align">Clientes - Aguardando Aprovação</h2> */}
+      <NavbarTeal title="Aguardando Aprovação:" />
+      <ul className="collection">
         {pendingUsers.map(user => (
-          <li key={user._id}>
-            {user.email} - <button onClick={() => approveUser(user._id)}>Aprovar</button>
-            <button onClick={() => deleteUser(user._id)}>Rejeitar</button>
+          <li className="collection-item" key={user._id}>
+            <div>
+              <strong>{user.email}</strong>
+              <div className="secondary-content">
+                <button className="btn green" onClick={() => approveUser(user._id)}>Aprovar</button>
+                <button className="btn deep-orange" onClick={() => deleteUser(user._id)}>Rejeitar</button>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
 
-      <h2>Clientes - Aprovados:</h2>
-      <ul>
+      {/* <h2 className="center-align">Clientes - Aprovados</h2> */}
+      <NavbarTeal title="Aprovados:" />
+      <ul className="collection">
         {approvedUsers.map(user => (
-          <li key={user._id}>
-            {user.name} - {user.email} - {user.cpf}
+          <li className="collection-item" key={user._id}>
+            <div>
+              <strong>{user.name}</strong> - {user.email} - {user.cpf}
+            </div>
           </li>
         ))}
       </ul>
 
-      <h2>Todos os Clientes:</h2>
-      <ul>
+      {/* <h2 className="center-align">Todos os Clientes</h2> */}
+      <NavbarTeal title="Todos:" />
+      <ul className="collection">
         {allUsers.map(user => (
-          <li key={user._id}>
-            {user.name} - {user.email} - {user.cpf}
+          <li className="collection-item" key={user._id}>
+            <div>
+              <strong>{user.name}</strong> - {user.email} - {user.cpf}
+            </div>
           </li>
         ))}
       </ul>
-
     </div>
   );
+
 };
 
 export default AdminApprovalPanel;

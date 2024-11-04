@@ -1,35 +1,19 @@
-// import React from 'react';
-// // import InventoryManager from '../components/InventoryManager';
-// import AdminProductLists from '../components/AdminProductLists';
-// // import OutOfStockReport from '../components/OutOfStockReport';
-
-// const AdminDashboardProduct: React.FC = () => (
-//   <div>
-//     <h1>Dashboard do Administrador</h1>
-//     <AdminProductLists />
-//     {/* <OutOfStockReport /> */}
-//   </div>
-// );
-
-// export default AdminDashboardProduct;
-
-
-
-import React from 'react';
+import React, { useState } from 'react';
 import AdminProductLists from '../components/AdminProductLists';
-import Sidebar from '../components/Sidebar';
+import Sidebar2 from '../components/Sidebar2';
 
 const AdminDashboardProduct: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="row">
       {/* Sidebar */}
-      <div className="col s3">
-        <Sidebar />
+      <div className={`col ${isSidebarOpen ? 's3' : 's0'}`}>
+        <Sidebar2 onToggle={setIsSidebarOpen} />
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="col s9">
-        <h1>Dashboard do Administrador</h1>
+      <div className={`col ${isSidebarOpen ? 's9' : 's12'}`}>
         <AdminProductLists />
       </div>
     </div>

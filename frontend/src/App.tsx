@@ -8,6 +8,8 @@ import UserSignup from './pages/UserSignup';
 import ProductForm from './components/ProductForm';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
+// Possibilita utilizar os icones do materializecss.com
+import 'material-design-icons/iconfont/material-icons.css';
 import PageHome from './pages/PageHome';
 
 const App = () => {

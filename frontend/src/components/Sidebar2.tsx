@@ -23,15 +23,20 @@ const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
     return (
         <div>
             <ul id="slide-out" className="sidenav">
-                <li><a href="/">Home</a></li>
-                <li><a href="#!" className="brand-logo">Admin</a></li>
-                <li><a href="/admin/product">Produtos</a></li>
-                <li><a href="/admin/client">Clientes</a></li>
+                <li><a href="/"><i className="material-icons">store</i>Home</a></li>
+                <li><a href="#!" className="brand-logo"><i className="material-icons">account_box</i>Admin</a></li>
+                <li><a href="/admin/product"><i className="material-icons">storage</i>Produtos</a></li>
+                <li><a href="/admin/client"><i className="material-icons">people</i>Clientes</a></li>
                 <li className="divider"></li>
-                <li><a href="#!">Sair</a></li>
+                <li><a href="#!"><i className="material-icons">exit_to_app</i>Sair</a></li>
             </ul>
             <a href="#!" data-target="slide-out" className="sidenav-trigger show-on-large">
-                <i className="material-icons">menu</i>
+                {/* <i className="material-icons">menu</i> */}
+                <img 
+                    src="/assets/icons/logo.png" 
+                    alt="menu" 
+                    style={{ width: '10%', height: 'auto' }} // ajuste o tamanho conforme necessário
+                />
             </a>
         </div>
     );

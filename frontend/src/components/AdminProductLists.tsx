@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import NavbarOrange from './NavbarOrange';
+import NavbarTeal from './NavbarTeal';
 
 type Product = {
   _id: string;
@@ -65,9 +67,11 @@ const AdminProductLists: React.FC = () => {
 
   return (
     <div className="container">
-      <h2 className="center-align">Produtos</h2>
+      <NavbarOrange title="Dashboard do Administrador: Produto" />
+      {/* <h2 className="center-align">Produtos</h2> */}
 
-      <h3>Ativos:</h3>
+      {/* <h3>Ativos:</h3> */}
+      <NavbarTeal title="Ativos" />
       <ul className="collection">
         {activeProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
@@ -83,7 +87,8 @@ const AdminProductLists: React.FC = () => {
         ))}
       </ul>
 
-      <h3>Inativos:</h3>
+      {/* <h3>Inativos:</h3> */}
+      <NavbarTeal title="Inativos:" />
       <ul className="collection">
         {inactiveProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
@@ -99,7 +104,8 @@ const AdminProductLists: React.FC = () => {
         ))}
       </ul>
 
-      <h3>Todos os Produtos:</h3>
+      {/* <h3>Todos os Produtos:</h3> */}
+      <NavbarTeal title="Todos os Produtos:" />
       <ul className="collection">
         {allProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
