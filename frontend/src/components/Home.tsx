@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div className="col s12 m6 l4" key={product._id}>
-              <div className="card">
+              <div className="card borda">
                 <div className="card-image">
                   {/* <img src={product.images[0]} alt={product.name} /> */}
                   <img 

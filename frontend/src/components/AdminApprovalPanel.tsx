@@ -63,9 +63,9 @@ const AdminApprovalPanel: React.FC = () => {
   return (
     <div className="container">
       <NavbarOrange title="Dashboard do Administrador: Clientes" />
-      {/* <h2 className="center-align">Clientes - Aguardando Aprovação</h2> */}
+      
       <NavbarTeal title="Aguardando Aprovação:" />
-      <ul className="collection">
+      <ul className="collection borda">
         {pendingUsers.map(user => (
           <li className="collection-item" key={user._id}>
             <div>
@@ -79,9 +79,8 @@ const AdminApprovalPanel: React.FC = () => {
         ))}
       </ul>
 
-      {/* <h2 className="center-align">Clientes - Aprovados</h2> */}
       <NavbarTeal title="Aprovados:" />
-      <ul className="collection">
+      <ul className="collection borda">
         {approvedUsers.map(user => (
           <li className="collection-item" key={user._id}>
             <div>
@@ -91,9 +90,8 @@ const AdminApprovalPanel: React.FC = () => {
         ))}
       </ul>
 
-      {/* <h2 className="center-align">Todos os Clientes</h2> */}
       <NavbarTeal title="Todos:" />
-      <ul className="collection">
+      <ul className="collection borda">
         {allUsers.map(user => (
           <li className="collection-item" key={user._id}>
             <div>

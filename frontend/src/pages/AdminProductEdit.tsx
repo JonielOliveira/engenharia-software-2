@@ -19,9 +19,9 @@ const AdminProductEdit: React.FC = () => {
 
       {/* Conteúdo Principal */}
       <div className={`col ${isSidebarOpen ? 's9' : 's12'}`}>
-        <h1>Atualização de Produto</h1>
+        {/* <h1>Atualização de Produto</h1> */}
         {successMessage && <p>{successMessage}</p>}
-        <ProductForm onSuccess={handleSuccess} />
+        <ProductForm onSuccess={handleSuccess} title="Atualização de Produto" />
       </div>
     </div>
   );

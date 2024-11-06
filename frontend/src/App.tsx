@@ -11,6 +11,7 @@ import 'materialize-css/dist/js/materialize.min.js';
 // Possibilita utilizar os icones do materializecss.com
 import 'material-design-icons/iconfont/material-icons.css';
 import PageHome from './pages/PageHome';
+import UserLogin from './pages/UserLogin';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/admin/product" element={<AdminDashboardProduct />} />
         <Route path="/" element={<PageHome />} />
         <Route path="/signup" element={<UserSignup />} />
+        <Route path="/login" element={<UserLogin />} />
         {/* Adicione mais rotas conforme necessário */}
       </Routes>
     </Router>

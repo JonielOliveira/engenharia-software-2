@@ -68,11 +68,9 @@ const AdminProductLists: React.FC = () => {
   return (
     <div className="container">
       <NavbarOrange title="Dashboard do Administrador: Produto" />
-      {/* <h2 className="center-align">Produtos</h2> */}
 
-      {/* <h3>Ativos:</h3> */}
       <NavbarTeal title="Ativos" />
-      <ul className="collection">
+      <ul className="collection borda">
         {activeProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
             <div>
@@ -87,9 +85,8 @@ const AdminProductLists: React.FC = () => {
         ))}
       </ul>
 
-      {/* <h3>Inativos:</h3> */}
       <NavbarTeal title="Inativos:" />
-      <ul className="collection">
+      <ul className="collection borda">
         {inactiveProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
             <div>
@@ -104,9 +101,8 @@ const AdminProductLists: React.FC = () => {
         ))}
       </ul>
 
-      {/* <h3>Todos os Produtos:</h3> */}
       <NavbarTeal title="Todos os Produtos:" />
-      <ul className="collection">
+      <ul className="collection borda">
         {allProducts.map(prod => (
           <li className="collection-item" key={prod._id}>
             <strong>{prod.sku} - {prod.name}</strong> - {prod.description} - R$ {prod.price.toFixed(2)} - {prod.quantity}

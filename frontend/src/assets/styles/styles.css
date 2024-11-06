@@ -25,3 +25,11 @@ body {
     border-radius: 20px;
     width: 50%;
 }
+
+.borda {
+    border-radius: 10px;
+}
+
+.branca {
+    background-color: #ffffff !important;
+}

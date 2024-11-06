@@ -19,9 +19,9 @@ const AdminProductCreate: React.FC = () => {
 
       {/* Conteúdo Principal */}
       <div className={`col ${isSidebarOpen ? 's9' : 's12'}`}>
-        <h1>Cadastro de Produto</h1>
+        {/* <h1>Cadastro de Produto</h1> */}
         {successMessage && <p>{successMessage}</p>}
-        <ProductForm onSuccess={handleSuccess} />
+        <ProductForm onSuccess={handleSuccess} title="Novo Produto" />
       </div>
     </div>
   );
