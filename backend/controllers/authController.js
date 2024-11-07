@@ -117,21 +117,33 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Verificar se o usuário existe
+    // 1. Encontre o usuário no banco de dados
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Usuário não encontrado' });
     }
 
-    // Verificar se a senha está correta
+    // 2. Verifique se o usuário está aprovado
+    if (!user.isApproved) {
+      return res.status(403).json({ message: 'Usuário não aprovado. Aguardando aprovação.' });
+    }
+
+    // 3. Verifique a senha (usando bcrypt ou outra função de comparação)
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Credenciais inválidas' });
     }
 
-    // Gerar um token de autenticação
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // 4. Crie o payload do token com o ID e o role do usuário
+    const payload = {
+      id: user._id,
+      role: user.role
+    };
 
+    // 5. Gere o token JWT com o payload
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // 6. Retorne o token ao usuário
     res.status(200).json({ message: 'Login realizado com sucesso', token });
   } catch (error) {
     res.status(500).json({ message: 'Erro ao realizar login', error: error.message });

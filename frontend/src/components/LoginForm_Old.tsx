@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import NavbarOrange from './NavbarOrange';
 
 const LoginForm = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,8 +17,8 @@ const LoginForm = () => {
       const { token } = response.data;
       // Armazene o token no localStorage
       localStorage.setItem('token', token);
-      window.location.reload();
-      // alert('Login realizado com sucesso!');
+      
+      alert('Login realizado com sucesso!');
       navigate('/'); // Redireciona para a página home
     } catch (error) {
       setError('Falha ao fazer login. Verifique suas credenciais.');

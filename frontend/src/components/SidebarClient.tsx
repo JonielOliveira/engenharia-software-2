@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 
-interface SidebarProps {
+interface SidebarClientProps {
     onToggle: (isOpen: boolean) => void;
 }
 
-const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
-    const { logout } = useAuth(); 
+const SidebarClient: React.FC<SidebarClientProps> = ({ onToggle }) => {
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         // Inicializando o Sidenav
         const sidenav = M.Sidenav.init(document.querySelectorAll('.sidenav'), {
@@ -31,14 +29,13 @@ const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
         // alert('Você saiu da sua conta');
         navigate('/login'); // Redireciona para a página de login
     };
-
+    
     return (
         <div>
             <ul id="slide-out" className="sidenav">
                 <li><a href="/"><i className="material-icons">store</i>Home</a></li>
                 <li><a href="#!"><i className="material-icons">account_box</i>Meus Dados</a></li>
-                <li><a href="/admin/product"><i className="material-icons">storage</i>Produtos</a></li>
-                <li><a href="/admin/client"><i className="material-icons">people</i>Clientes</a></li>
+                <li><a href="#!"><i className="material-icons">local_shipping</i>Pedidos</a></li>
                 <li className="divider"></li>
                 <li><a href="/" onClick={handleLogout}><i className="material-icons">exit_to_app</i>Sair</a></li>
             </ul>
@@ -54,4 +51,4 @@ const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
     );
 };
 
-export default Sidebar2;
+export default SidebarClient;

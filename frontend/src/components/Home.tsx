@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get('/admin/products');
+        const response = await api.get('/admin/products/active');
         setProducts(response.data);
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
@@ -56,11 +56,13 @@ const Home: React.FC = () => {
                 <div className="card-image">
                   {/* <img src={product.images[0]} alt={product.name} /> */}
                   <img 
-                    src="/assets/images/product_example.png" 
+                    src="/assets/images/product_example_dark.png" 
                     alt={product.name}
-                    style={{ width: '80%', height: 'auto' }}
+                    style={{ width: '80%', height: 'auto', display: 'block', margin: '0 auto' }}
                   />
-                  <span className="card-title">{product.name}</span>
+                  <span className="card-title" style={{ fontWeight: 'bold', color: '#FF882A', marginLeft: '20px' }}>
+                    {product.name}
+                  </span>
                 </div>
                 <div className="card-content">
                   <p>{product.description}</p>
@@ -73,7 +75,7 @@ const Home: React.FC = () => {
                     )}
                   </p>
                 </div>
-                <div className="card-action">
+                <div className="card-action" style={{ textAlign: 'center' }}>
                   <Link to={`/products/${product._id}`} className="btn">Ver Detalhes</Link>
                 </div>
               </div>
