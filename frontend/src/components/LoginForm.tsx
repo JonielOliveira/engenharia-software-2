@@ -12,9 +12,13 @@ const LoginForm = () => {
     setError('');
     try {
       const response = await api.post('/auth/login', { email, password });
+      const { token } = response.data;
+      // Armazene o token no localStorage
+      localStorage.setItem('token', token);
+      
       alert('Login realizado com sucesso!');
       // Redirecionar ou armazenar o token, caso o login seja bem-sucedido
-      console.log('Token:', response.data.token);
+      //   console.log('Token:', response.data.token);
     } catch (error) {
       setError('Falha ao fazer login. Verifique suas credenciais.');
       console.error('Erro ao fazer login', error);

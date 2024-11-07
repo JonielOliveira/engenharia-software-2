@@ -12,15 +12,19 @@ import 'materialize-css/dist/js/materialize.min.js';
 import 'material-design-icons/iconfont/material-icons.css';
 import PageHome from './pages/PageHome';
 import UserLogin from './pages/UserLogin';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/admin/client" element={<AdminDashboardClient />} />
-        <Route path="/admin/products/edit/:productId" element={<AdminProductEdit />} />
-        <Route path="/admin/product/create" element={<AdminProductCreate />} />
-        <Route path="/admin/product" element={<AdminDashboardProduct />} />
+        {/* Rota protegida */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin/client" element={<AdminDashboardClient />} />
+          <Route path="/admin/products/edit/:productId" element={<AdminProductEdit />} />
+          <Route path="/admin/product/create" element={<AdminProductCreate />} />
+          <Route path="/admin/product" element={<AdminDashboardProduct />} />
+        </Route>
         <Route path="/" element={<PageHome />} />
         <Route path="/signup" element={<UserSignup />} />
         <Route path="/login" element={<UserLogin />} />

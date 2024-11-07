@@ -1,3 +1,6 @@
+// Importe uma biblioteca de hashing, como bcrypt, e jwt para criar o token
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 // CRUD+ - [C]reate, [R]ead, [U]pdate, [D]elete + (Some more things)
@@ -106,5 +109,31 @@ exports.approveUser = async (req, res) => {
     res.status(200).json({ message: 'Usuário aprovado com sucesso' });
   } catch (error) {
     res.status(500).json({ message: 'Erro ao aprovar usuário', error: error.message });
+  }
+};
+
+//[8] Método para autenticar o usuário
+exports.loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Verificar se o usuário existe
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Usuário não encontrado' });
+    }
+
+    // Verificar se a senha está correta
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    // Gerar um token de autenticação
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(200).json({ message: 'Login realizado com sucesso', token });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao realizar login', error: error.message });
   }
 };

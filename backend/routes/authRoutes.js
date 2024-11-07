@@ -6,7 +6,8 @@
             listAllUsers,
             getPendingUsers,
             getApprovedUsers,
-            approveUser
+            approveUser,
+            loginUser
         } = require('../controllers/authController');
 
     // [1] Criar um novo usuário
@@ -29,5 +30,8 @@
 
     // [7] Aprovar um usuário
     router.patch('/users/approve', approveUser);
+
+    // [8] Rota de Login do Usuário
+    router.post('/login', loginUser);
 
     module.exports = router;

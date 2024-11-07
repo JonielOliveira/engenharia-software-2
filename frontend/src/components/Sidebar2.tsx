@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 
 interface SidebarProps {
@@ -6,7 +7,8 @@ interface SidebarProps {
 }
 
 const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         // Inicializando o Sidenav
         const sidenav = M.Sidenav.init(document.querySelectorAll('.sidenav'), {
@@ -20,6 +22,13 @@ const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
         };
     }, [onToggle]);
 
+    const handleLogout = async (e: React.FormEvent) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        // alert('Você saiu da sua conta');
+        navigate('/'); // Redireciona para a página de login
+    };
+
     return (
         <div>
             <ul id="slide-out" className="sidenav">
@@ -28,7 +37,7 @@ const Sidebar2: React.FC<SidebarProps> = ({ onToggle }) => {
                 <li><a href="/admin/product"><i className="material-icons">storage</i>Produtos</a></li>
                 <li><a href="/admin/client"><i className="material-icons">people</i>Clientes</a></li>
                 <li className="divider"></li>
-                <li><a href="#!"><i className="material-icons">exit_to_app</i>Sair</a></li>
+                <li><a href="/" onClick={handleLogout}><i className="material-icons">exit_to_app</i>Sair</a></li>
             </ul>
             <a href="#!" data-target="slide-out" className="sidenav-trigger show-on-large">
                 {/* <i className="material-icons">menu</i> */}
