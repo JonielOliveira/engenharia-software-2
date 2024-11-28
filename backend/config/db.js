@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // Carrega as variáveis do arquivo .env
 
-// process.env.MONGO_URI
+// Obtém a variável MONGODB_URI do arquivo .env
+const mongoURI = process.env.MONGODB_URI
 
-mongoose.connect("mongodb://localhost:27017/feirao", {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
